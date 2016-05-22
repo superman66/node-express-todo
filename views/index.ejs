@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div class="container">
+	<h1 class="title"><%= title %></h1>
+	<section class="form-content">
+		<form action="/create" method="post" accept-charset="utf-8">
+			<input class="form-control" type="text" name="content" placeholder="添加待办事项"/>
+		</form>
+		<ul class="todo-list">
+			<% todos.forEach(function(todo){ %>
+			<li>
+				<a href="/edit/<%= todo._id %>">
+					<%= todo.content %>
+				</a>
+				<a class="btn-del" href="/delete/<%= todo._id %>" title="Delete this todo item"></a>
+				<!--<input type="text" class="form-control btn-primary"/>-->
+			</li>
+			<% }) %>
+		</ul>
+	</section>
+</div>
+<footer>
+	Double-click to edit a todo
+</footer>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+	$(function(){
+
+	});
+</script>
+</body>
+</html>
