@@ -5,28 +5,32 @@
 	<link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
-<h1><%= title %></h1>
-<form action="/update" method="post" accept-charset="utf-8">
-	<input type="text" name="content"/>
-</form>
-<% todos.forEach(function(todo){ %>
-<p>
-	<span>
-		<% if(todo._id == current){ %>
-		<form action="/update/<%= todo._id%>" method="post" accept-charset="utf-8">
-			<input type="text" name="content" value="<%= todo.content%>"/>
+<div class="container">
+	<h1 class="title"><%= title %></h1>
+	<section class="form-content">
+		<form action="/create" method="post" accept-charset="utf-8">
+			<input type="text" class="form-control" name="content" placeholder="添加待办事项"/>
 		</form>
-		</span>
-	<% } else { %>
-	<a href="/edit/<%= todo._id%>">
-		<%= todo.content%>
-	</a>
-	<span>
-		<a href="/delete/<%= todo._id %>" title="Delete this todo item">Delete</a>
-	</span>
-	<% } %>
-
-</p>
-<% }); %>
+		<ul class="todo-list">
+			<% todos.forEach(function(todo){ %>
+			<li>
+				<% if(todo._id == current){ %>
+				<form action="/update/<%= todo._id%>" method="post" accept-charset="utf-8">
+					<input type="text" class="form-control btn-primary" name="content" value="<%= todo.content %>"/>
+				</form>
+				<% } else { %>
+				<a href="/edit/<%= todo._id %>">
+					<%= todo.content %>
+				</a>
+				<a class="btn-del" href="/delete/<%= todo._id %>" title="Delete this todo item"></a>
+				<% } %>
+			</li>
+			<% }); %>
+		</ul>
+	</section>
+</div>
+<footer>
+	输入回车键进行提交
+</footer>
 </body>
 </html>

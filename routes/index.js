@@ -26,7 +26,7 @@ router.post('/create', function(req, res, next){
     })
 });
 
-router.delete('/delete/:id', function(req, res, next){
+router.get('/delete/:id', function(req, res, next){
     Todo.findById(req.params.id, function(err, todo){
         todo.remove(function(err, todo){
             res.redirect('/');
@@ -46,12 +46,13 @@ router.get('/edit/:id', function(req, res, next){
         });
 });
 
-router.put('/update/:id', function(req, res, next){
+router.post('/update/:id', function(req, res, next){
     Todo.findById(req.params.id, function(err, todo){
         todo.content = req.body.content;
         todo.update_at = Date.now();
-    }).save(function(err, todo, count){
-        res.redirect('/');
+        todo.save(function(err, todo, count){
+            res.redirect('/');
+        })
     })
 });
 module.exports = router;
