@@ -3,56 +3,82 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Todo = mongoose.model('Todo');
 
-/* GET home page. */
-router.get('/', function(req, res, next){
+router.get('/', function(req, res){
+    res.sendfile('./front/index.html');
+});
+
+/* restful api */
+//get all todo
+router.get('/api/todos', function(req, res, next){
     Todo
         .find()
         .sort('-update_at')
         .exec(function(err, todos){
-            res.render('index', {
-                title : 'Express Todo Example',
-                todos : todos,
-                layout : 'layout'
-            });
+            if(err){
+                res.send(err);
+            }
+            res.json(todos);
         });
 });
 
-router.post('/create', function(req, res, next){
+//POST that create todo and return all todos
+router.post('/api/todo', function(req, res, next){
     new Todo({
         content : req.body.content,
         update_at : new Date()
     }).save(function(err, todo, count){
-        res.redirect('/');
+        if(err){
+            res.send(err);
+        }
+        Todo
+            .find()
+            .sort('-update_at') //更加日期排序
+            .exec(function(err, todos){
+                if(err){
+                    res.send(err);
+                }
+                res.json(todos);
+            });
     })
 });
 
-router.get('/delete/:id', function(req, res, next){
+router.delete('/api/todo/:id', function(req, res, next){
     Todo.findById(req.params.id, function(err, todo){
         todo.remove(function(err, todo){
-            res.redirect('/');
+            if(err){
+                res.send(err);
+            }
+            Todo
+                .find()
+                .sort('-update_at') //更加日期排序
+                .exec(function(err, todos){
+                    if(err){
+                        res.send(err);
+                    }
+                    res.json(todos);
+                });
         })
     })
 });
-router.get('/edit/:id', function(req, res, next){
+router.put('/api/todo/:id', function(req, res, next){
     Todo
         .find()
         .sort('-update_at')
         .exec(function(err, todos){
-            res.render('edit', {
-                title : 'Express Todo Example ',
-                todos : todos,
-                current : req.params.id
-            });
+            if(err){
+                res.send(err);
+            }
+            Todo
+                .find()
+                .sort('-update_at') //更加日期排序
+                .exec(function(err, todos){
+                    if(err){
+                        res.send(err);
+                    }
+                    res.json(todos);
+                });
         });
 });
 
-router.post('/update/:id', function(req, res, next){
-    Todo.findById(req.params.id, function(err, todo){
-        todo.content = req.body.content;
-        todo.update_at = Date.now();
-        todo.save(function(err, todo, count){
-            res.redirect('/');
-        })
-    })
-});
+
 module.exports = router;
