@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+</head>
+<body ng-app="TodoApp">
+<div class="container" ng-controller="TodoController as vm">
+    <h1 class="title">TODO</h1>
+    <section class="form-content">
+        <form  ng-submit="vm.createTodo(vm.todo)">
+            <input class="form-control" type="text" name="content" ng-model="vm.todo.content" placeholder="添加待办事项"
+                   required/>
+            <!--<input type="submit" value="添加">-->
+        </form>
+        <ul class="todo-list">
+            <li ng-repeat="todo in vm.todos">
+                <a>
+                    {{todo.content}}
+                </a>
+                <a class="btn-del" ng-click="vm.delTodo(todo._id)" title="Delete this todo item"></a>
+                <!--<input type="text" class="form-control btn-primary"/>-->
+            </li>
+        </ul>
+    </section>
+</div>
+<footer>
+    输入回车键进行提交
+</footer>
+</body>
+<script src="/jquery/dist/jquery.min.js"></script>
+<script src="/angular/angular.min.js"></script>
+<script src="/index.module.js"></script>
+</html>

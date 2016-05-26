@@ -23,7 +23,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));  //配置静态文件服务器
+app.use(express.static(path.join(__dirname, 'node_modules')));  //可以配置多个静态文件服务器
 app.use('/', routes);
 
 // catch 404 and forward to error handler

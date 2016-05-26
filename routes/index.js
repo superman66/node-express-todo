@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Todo = mongoose.model('Todo');
 
 router.get('/', function(req, res){
-    res.sendfile('./front/index.html');
+    res.sendfile('./views/index.html');
 });
 
 /* restful api */
@@ -42,6 +42,7 @@ router.post('/api/todo', function(req, res, next){
     })
 });
 
+//删除后返回所有
 router.delete('/api/todo/:id', function(req, res, next){
     Todo.findById(req.params.id, function(err, todo){
         todo.remove(function(err, todo){
