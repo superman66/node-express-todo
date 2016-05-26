@@ -24,8 +24,8 @@
             };
             var _updateTodo = function (todo) {
                 return $http({
-                    method: 'POST',
-                    url: '/api/todo',
+                    method: 'PUT',
+                    url: '/api/todo/' + todo._id,
                     data: todo
                 })
             };
@@ -53,12 +53,20 @@
                     vm.todos = data;
                     vm.todo.content = '';
                 });
-            }
+            };
             
             vm.delTodo = function (id) {
                 TodoService.deleteTodo(id).success(function (data) {
                     vm.todos = data;
                 })
+            };
+
+            vm.updateTodo = function(todo){
+                // console.log(todo);
+                TodoService.updateTodo(todo).success(function(data){
+                    //vm.todos = data;
+                })
             }
+
         }]);
 })();

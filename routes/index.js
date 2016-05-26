@@ -61,14 +61,18 @@ router.delete('/api/todo/:id', function(req, res, next){
         })
     })
 });
+//Update
 router.put('/api/todo/:id', function(req, res, next){
-    Todo
-        .find()
-        .sort('-update_at')
-        .exec(function(err, todos){
+    //更新操作
+    Todo.findById(req.params.id, function(err, todo){
             if(err){
                 res.send(err);
             }
+        todo.content = req.body.content;
+        todo.save(function(err){
+            console.log('update success');
+        });
+    });
             Todo
                 .find()
                 .sort('-update_at') //更加日期排序
@@ -78,7 +82,6 @@ router.put('/api/todo/:id', function(req, res, next){
                     }
                     res.json(todos);
                 });
-        });
 });
 
 

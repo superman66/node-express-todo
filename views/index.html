@@ -17,10 +17,10 @@
         <ul class="todo-list">
             <li ng-repeat="todo in vm.todos">
                 <a>
-                    {{todo.content}}
+                    <input type="text" class="form-control btn-primary"  ng-model="todo.content" ng-blur="vm.updateTodo(todo)"/>
                 </a>
                 <a class="btn-del" ng-click="vm.delTodo(todo._id)" title="Delete this todo item"></a>
-                <!--<input type="text" class="form-control btn-primary"/>-->
+
             </li>
         </ul>
     </section>

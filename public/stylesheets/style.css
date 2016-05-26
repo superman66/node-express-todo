@@ -16,7 +16,7 @@ a{
 	text-decoration:none;
 }
 .container{
-	width:1000px;
+	width:100%;
 	margin:0 auto;
 }
 .title{
@@ -31,7 +31,7 @@ a{
 .form-control{
 	position:relative;
 	margin:0;
-	width:100%;
+	width:70%;
 	font-size:24px;
 	font-family:inherit;
 	font-weight:inherit;
@@ -61,7 +61,7 @@ footer{
 	width:15px;
 	height:15px;
 	float:right;
-	margin:0 30px 0 0;
+	margin:10px 30px 0 0;
 }
 .todo-list{
 	margin: 0 0 15px 0;
