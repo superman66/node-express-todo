@@ -10,5 +10,13 @@ var Todo = new Schema({
     update_at : Date
 });
 
+var User = new Schema({
+    id: String,
+    username: String,
+    password: String,
+    create_date: {type: Date, default: Date.now},
+    update_date: Date
+});
 mongoose.model('Todo', Todo);
+mongoose.model('User', User);
 mongoose.connect('mongodb://localhost/express-todo');

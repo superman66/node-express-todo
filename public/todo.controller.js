@@ -5,37 +5,6 @@
     'use strict';
 
     angular.module('TodoApp', [])
-        .factory('TodoService', ['$http', function ($http) {
-            var _getTodoList = function () {
-                return $http.get('/api/todos');
-            };
-            var _createTodo = function (todo) {
-                return $http({
-                    method: 'POST',
-                    url: '/api/todo',
-                    data: todo
-                })
-            };
-            var _deleteTodo = function (id) {
-                return $http({
-                    method: 'DELETE',
-                    url: '/api/todo/' + id
-                })
-            };
-            var _updateTodo = function (todo) {
-                return $http({
-                    method: 'PUT',
-                    url: '/api/todo/' + todo._id,
-                    data: todo
-                })
-            };
-            return {
-                todoList: _getTodoList,
-                createTodo: _createTodo,
-                deleteTodo: _deleteTodo,
-                updateTodo: _updateTodo
-            }
-        }])
         .controller('TodoController', ['TodoService', function (TodoService) {
             var vm = this;
             vm.todos = [];
@@ -68,5 +37,7 @@
                 })
             }
 
-        }]);
+        }])
+        .controller('')
+    ;
 })();
